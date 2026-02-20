@@ -17,6 +17,68 @@ export type StageDef = {
 
 export const stages: StageDef[] = [
   {
+    title: 'Ladder Finals (3 Lanes)',
+    goalY: 42,
+    zoomY: 36,
+    finishZones: [
+      { name: 'Left Lane', xMin: 8, xMax: 13.3, y: 42 },
+      { name: 'Center Lane', xMin: 13.3, xMax: 18.7, y: 42 },
+      { name: 'Right Lane', xMin: 18.7, xMax: 24, y: 42 },
+    ],
+    entities: [
+      // outer walls
+      {
+        type: 'static',
+        position: { x: 8, y: -120 },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+        shape: { type: 'box', width: 0.1, height: 180, rotation: 0 },
+      },
+      {
+        type: 'static',
+        position: { x: 24, y: -120 },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+        shape: { type: 'box', width: 0.1, height: 180, rotation: 0 },
+      },
+
+      // light peg field (ladder 느낌)
+      { type: 'static', position: { x: 10, y: 8 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 13, y: 8 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 16, y: 8 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 19, y: 8 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 22, y: 8 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+
+      { type: 'static', position: { x: 11.5, y: 12 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 14.5, y: 12 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 17.5, y: 12 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 20.5, y: 12 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+
+      { type: 'static', position: { x: 10, y: 16 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 13, y: 16 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 16, y: 16 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 19, y: 16 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 22, y: 16 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+
+      { type: 'static', position: { x: 11.5, y: 20 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 14.5, y: 20 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 17.5, y: 20 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+      { type: 'static', position: { x: 20.5, y: 20 }, props: { density: 1, angularVelocity: 0, restitution: 0 }, shape: { type: 'box', width: 0.25, height: 0.25, rotation: 0.7853981633974483 } },
+
+      // finish splitters
+      {
+        type: 'static',
+        position: { x: 13.3, y: 37.5 },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+        shape: { type: 'box', width: 0.1, height: 4.5, rotation: 0 },
+      },
+      {
+        type: 'static',
+        position: { x: 18.7, y: 37.5 },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+        shape: { type: 'box', width: 0.1, height: 4.5, rotation: 0 },
+      },
+    ],
+  },
+  {
     title: 'Starter Wheel',
     goalY: 111,
     zoomY: 106.75,
