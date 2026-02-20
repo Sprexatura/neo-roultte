@@ -57,6 +57,7 @@ export class Roulette extends EventTarget {
   private _isReady: boolean = false;
   private fastForwarder!: FastForwader;
   private _theme: ColorTheme = Themes.dark;
+  private _focusOnWinner: boolean = false;
 
   get isReady() {
     return this._isReady;
@@ -119,9 +120,9 @@ export class Roulette extends EventTarget {
       this._camera.update({
         marbles: this._marbles,
         stage: this._stage,
-        needToZoom: this._goalDist < zoomThreshold,
+        needToZoom: this._focusOnWinner && this._goalDist < zoomThreshold,
         targetIndex:
-          this._winners.length > 0
+          this._focusOnWinner && this._winners.length > 0
             ? this._winnerRank - this._winners.length
             : 0,
       });
@@ -385,7 +386,9 @@ export class Roulette extends EventTarget {
     if (this._winnerRank >= this._marbles.length) {
       this._winnerRank = this._marbles.length - 1;
     }
-    this._camera.startFollowingMarbles();
+    if (this._focusOnWinner) {
+      this._camera.startFollowingMarbles();
+    }
 
     if (this._autoRecording) {
       this._recorder.start().then(() => {
@@ -407,6 +410,10 @@ export class Roulette extends EventTarget {
 
   public setTheme(themeName: keyof typeof Themes) {
     this._theme = Themes[themeName];
+  }
+
+  public setFocusOnWinner(value: boolean) {
+    this._focusOnWinner = value;
   }
 
   public getSpeed() {
