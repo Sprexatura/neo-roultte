@@ -21,9 +21,9 @@ export const stages: StageDef[] = [
     goalY: 111,
     zoomY: 106.75,
     finishZones: [
-      { name: 'Left Lane', xMin: 2, xMax: 9.8, y: 111 },
-      { name: 'Center Lane', xMin: 9.8, xMax: 16.8, y: 111 },
-      { name: 'Right Lane', xMin: 16.8, xMax: 24.5, y: 111 },
+      { name: 'Left Lane', xMin: 2, xMax: 12.8, y: 111 },
+      { name: 'Center Lane', xMin: 12.8, xMax: 19.2, y: 111 },
+      { name: 'Right Lane', xMin: 19.2, xMax: 24.5, y: 111 },
     ],
     entities: [
       // polyline
@@ -399,6 +399,20 @@ export const stages: StageDef[] = [
           height: 0.25,
           rotation: 0.7853981633974483,
         },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+      },
+
+      // finish lane dividers (create 3 separate goal pockets)
+      {
+        position: { x: 12.8, y: 108.7 },
+        type: 'static',
+        shape: { type: 'box', width: 0.1, height: 3.2, rotation: 0 },
+        props: { density: 1, angularVelocity: 0, restitution: 0 },
+      },
+      {
+        position: { x: 19.2, y: 108.7 },
+        type: 'static',
+        shape: { type: 'box', width: 0.1, height: 3.2, rotation: 0 },
         props: { density: 1, angularVelocity: 0, restitution: 0 },
       },
 
