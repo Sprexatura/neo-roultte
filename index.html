@@ -199,7 +199,7 @@
 
     window.roulette.addEventListener('goal', (e) => {
       ready = false;
-      if (e.detail?.zone) {
+      if (e.detail?.zone && e.detail.zone !== 'Goal') {
         simpleToast(`Winner lane: ${e.detail.zone}`);
       }
       if (e.detail?.option) {

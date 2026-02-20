@@ -45,6 +45,7 @@ export class Roulette extends EventTarget {
   private _winner: Marble | null = null;
   private _winnerZoneName: string | null = null;
   private _winnerZoneOption: string | null = null;
+  private _goalOptions: string[] = ['Option A', 'Option B', 'Option C'];
 
   private _uiObjects: UIObject[] = [];
 
@@ -154,6 +155,12 @@ export class Roulette extends EventTarget {
     return null;
   }
 
+  private _pickGoalOption() {
+    if (this._goalOptions.length === 0) return 'Default Option';
+    const index = Math.floor(Math.random() * this._goalOptions.length);
+    return this._goalOptions[index];
+  }
+
   private _updateMarbles(deltaTime: number) {
     if (!this._stage) return;
 
@@ -173,14 +180,15 @@ export class Roulette extends EventTarget {
         this._winners.push(marble);
 
         if (this._isRunning && this._winners.length === this._winnerRank + 1) {
+          const assignedOption = this._pickGoalOption();
           this.dispatchEvent(
             new CustomEvent('goal', {
-              detail: { winner: marble.name, zone: reachedZone.name, option: reachedZone.option },
+              detail: { winner: marble.name, zone: reachedZone.name, option: assignedOption },
             }),
           );
           this._winner = marble;
           this._winnerZoneName = reachedZone.name;
-          this._winnerZoneOption = reachedZone.option;
+          this._winnerZoneOption = assignedOption;
           this._isRunning = false;
           this._particleManager.shot(
             this._renderer.width,
@@ -197,18 +205,19 @@ export class Roulette extends EventTarget {
           const lastMarble = this._marbles[i + 1];
           if (lastMarble) {
             const lastZone = this._getGoalZone(lastMarble);
+            const assignedOption = this._pickGoalOption();
             this.dispatchEvent(
               new CustomEvent('goal', {
                 detail: {
                   winner: lastMarble.name,
                   zone: lastZone?.name ?? reachedZone.name,
-                  option: lastZone?.option ?? reachedZone.option,
+                  option: assignedOption,
                 },
               }),
             );
             this._winner = lastMarble;
             this._winnerZoneName = lastZone?.name ?? reachedZone.name;
-            this._winnerZoneOption = lastZone?.option ?? reachedZone.option;
+            this._winnerZoneOption = assignedOption;
           }
           this._isRunning = false;
           this._particleManager.shot(
@@ -410,6 +419,11 @@ export class Roulette extends EventTarget {
 
   public setAutoRecording(value: boolean) {
     this._autoRecording = value;
+  }
+
+  public setGoalOptions(options: string[]) {
+    const normalized = options.map((v) => v.trim()).filter((v) => !!v);
+    this._goalOptions = normalized.length > 0 ? normalized : ['Option A', 'Option B', 'Option C'];
   }
 
   public setMarbles(names: string[]) {

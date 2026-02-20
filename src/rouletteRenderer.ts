@@ -260,7 +260,7 @@ export class RouletteRenderer {
       this.ctx.fillText(optionLabel, textRightX, this._canvas.height - 145);
     }
 
-    if (winnerZoneName) {
+    if (winnerZoneName && winnerZoneName !== 'Goal') {
       this.ctx.font = 'bold 28px sans-serif';
       this.ctx.fillStyle = theme.winnerText;
       const zoneLabel = `Lane: ${winnerZoneName}`;
