@@ -20,6 +20,7 @@ export type RenderParameters = {
   winnerRank: number;
   winner: Marble | null;
   winnerZoneName?: string | null;
+  winnerZoneOption?: string | null;
   size: VectorLike;
   theme: ColorTheme;
 };
@@ -198,7 +199,7 @@ export class RouletteRenderer {
     });
   }
 
-  private renderWinner({ winner, winnerZoneName, theme }: RenderParameters) {
+  private renderWinner({ winner, winnerZoneName, winnerZoneOption, theme }: RenderParameters) {
     if (!winner) return;
     this.ctx.save();
     this.ctx.fillStyle = theme.winnerBackground;
@@ -248,6 +249,16 @@ export class RouletteRenderer {
       this.ctx.strokeText(winner.name, textRightX, this._canvas.height - 55);
     }
     this.ctx.fillText(winner.name, textRightX, this._canvas.height - 55);
+
+    if (winnerZoneOption) {
+      this.ctx.font = 'bold 24px sans-serif';
+      this.ctx.fillStyle = theme.winnerText;
+      const optionLabel = `Option: ${winnerZoneOption}`;
+      if (theme.winnerOutline) {
+        this.ctx.strokeText(optionLabel, textRightX, this._canvas.height - 145);
+      }
+      this.ctx.fillText(optionLabel, textRightX, this._canvas.height - 145);
+    }
 
     if (winnerZoneName) {
       this.ctx.font = 'bold 28px sans-serif';

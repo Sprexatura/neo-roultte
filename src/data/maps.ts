@@ -2,6 +2,7 @@ import { MapEntity } from '../types/MapEntity.type';
 
 export type FinishZone = {
   name: string;
+  option: string;
   xMin: number;
   xMax: number;
   y: number;
@@ -21,9 +22,9 @@ export const stages: StageDef[] = [
     goalY: 42,
     zoomY: 36,
     finishZones: [
-      { name: 'Left Lane', xMin: 8, xMax: 13.3, y: 42 },
-      { name: 'Center Lane', xMin: 13.3, xMax: 18.7, y: 42 },
-      { name: 'Right Lane', xMin: 18.7, xMax: 24, y: 42 },
+      { name: 'Left Lane', option: 'Option A', xMin: 8, xMax: 13.3, y: 42 },
+      { name: 'Center Lane', option: 'Option B', xMin: 13.3, xMax: 18.7, y: 42 },
+      { name: 'Right Lane', option: 'Option C', xMin: 18.7, xMax: 24, y: 42 },
     ],
     entities: [
       // outer walls
@@ -83,9 +84,9 @@ export const stages: StageDef[] = [
     goalY: 111,
     zoomY: 106.75,
     finishZones: [
-      { name: 'Left Lane', xMin: 8.25, xMax: 12.8, y: 111 },
-      { name: 'Center Lane', xMin: 12.8, xMax: 19.2, y: 111 },
-      { name: 'Right Lane', xMin: 19.2, xMax: 24, y: 111 },
+      { name: 'Left Lane', option: 'Option A', xMin: 8.25, xMax: 12.8, y: 111 },
+      { name: 'Center Lane', option: 'Option B', xMin: 12.8, xMax: 19.2, y: 111 },
+      { name: 'Right Lane', option: 'Option C', xMin: 19.2, xMax: 24, y: 111 },
     ],
     entities: [
       // polyline

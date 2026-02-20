@@ -202,6 +202,9 @@
       if (e.detail?.zone) {
         simpleToast(`Winner lane: ${e.detail.zone}`);
       }
+      if (e.detail?.option) {
+        simpleToast(`Assigned option: ${e.detail.option}`);
+      }
       setTimeout(() => {
         document.querySelector('#settings').classList.remove('hide');
         document.querySelector('#donate').classList.remove('hide');
