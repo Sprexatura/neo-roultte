@@ -9,7 +9,7 @@ export type StageDef = {
 
 export const stages: StageDef[] = [
   {
-    title: 'Wheel of fortune',
+    title: 'Starter Wheel',
     goalY: 111,
     zoomY: 106.75,
     entities: [
@@ -429,7 +429,7 @@ export const stages: StageDef[] = [
     ],
   },
   {
-    'title': 'BubblePop',
+    'title': 'Bubble Pop',
     'goalY': 83,
     'zoomY': 78,
     'entities': [{
@@ -746,7 +746,7 @@ export const stages: StageDef[] = [
     }],
   },
   {
-    title: 'Pot of greed',
+    title: 'Treasure Pot',
     goalY: 111,
     zoomY: 110,
     entities: [
@@ -1060,7 +1060,7 @@ export const stages: StageDef[] = [
     ],
   },
   {
-    title: 'Yoru ni Kakeru',
+    title: 'Night Run',
     goalY: 248,
     zoomY: 234.5,
     entities: [

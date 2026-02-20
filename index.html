@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5899C1DJM0"></script>
-
-  <title>Marble Roulette</title>
+  <title>Custom Marble Roulette Starter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="assets/apple-icon-60x60.png">
@@ -26,11 +24,11 @@
   <meta name="msapplication-TileImage" content="assets/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-  <meta name="description" content="A lucky draw by dropping marbles, made by lazygyu">
-  <meta property="og:url" content="https://lazygyu.github.io/roulette/">
-  <meta property="og:title" content="Marble Roulette">
-  <meta property="og:description" content="A lucky draw by dropping marbles, made by lazygyu">
-  <meta property="og:site_name" content="lazygyu.github.io">
+  <meta name="description" content="Customizable lucky draw by dropping marbles">
+  <meta property="og:url" content="https://example.com/roulette/">
+  <meta property="og:title" content="Custom Marble Roulette Starter">
+  <meta property="og:description" content="Customizable lucky draw by dropping marbles">
+  <meta property="og:site_name" content="custom-roulette">
   <meta property="og:type" content="website">
 
   <link rel='stylesheet' href='assets/style.scss' />
@@ -38,15 +36,6 @@
 <body>
 <script type="module" src="./src/index.ts"></script>
 <script type="text/javascript">
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-
-  gtag('js', new Date());
-  gtag('config', 'G-5899C1DJM0');
-
   function getNames() {
     const value = document.querySelector('#in_names').value.trim();
     return value.split(/[,\r\n]/g).map(v => v.trim()).filter(v => !!v);
@@ -171,11 +160,6 @@
 
     document.querySelector('#btnStart').addEventListener('click', () => {
       if (!ready) return;
-      gtag && gtag('event', 'start', {
-        'event_category': 'roulette',
-        'event_label': 'start',
-        'value': window.roulette.getCount(),
-      });
       window.roulette.start();
       document.querySelector('#settings').classList.add('hide');
       document.querySelector('#donate').classList.add('hide');
@@ -361,15 +345,12 @@
     </div>
   </div>
   <div class="left">
-    <h3 data-trans>Enter names below</h3>
-    <textarea id="in_names" placeholder="Input names separated by commas or line feed here" data-trans="placeholder">수박*2,키위*2,귤*2</textarea>
+    <h3 data-trans>Enter participants</h3>
+    <textarea id="in_names" placeholder="Input names separated by commas or line breaks" data-trans="placeholder">Alice*2,Bob*2,Charlie*2</textarea>
     <div class="actions">
       <button id="btnNotice">
         <i class="icon megaphone"></i>
       </button>
-      <a href='https://marblerouletteshop.com' target='_blank' id="btnShop" class='btn new' title='MarbleRoulette Shop'>
-        <img src='assets/images/marblerouletteshop.png' />
-      </a>
       <div class="sep"></div>
       <button id="btnShuffle">
         <i class="icon shuffle"></i>
@@ -385,12 +366,9 @@
 <div id="notice">
   <h1>Notice</h1>
   <div class="notice-body">
-    <h2>커스텀 룰렛 기능 오픈!</h2>
-    <p>나만의 특별한 룰렛을 만들 수 있는 커스텀 룰렛 기능이 오픈했어요!</p>
-    <p>
-      <a href='https://marblerouletteshop.com/intro/roulette' target='_blank' class='shop-button holographic'><img
-        src='assets/images/marblerouletteshop.png' width='125' height='125' /> 룰렛 꾸미러 가기</a>
-    </p>
+    <h2>커스터마이징 템플릿</h2>
+    <p>이 포크는 외부 브랜드/트래킹 요소를 제거한 스타터 템플릿입니다.</p>
+    <p>맵, 테마, UI 문구를 자유롭게 수정해 사용하세요.</p>
   </div>
   <div class="notice-action">
     <button id="closeNotice" data-trans>Close</button>

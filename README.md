@@ -1,24 +1,34 @@
-# Marble roulette
+# Custom Marble Roulette Starter
 
-This is a lucky draw by dropping marbles.
+A fork-friendly starter template based on `lazygyu/roulette`.
 
-[Demo]( https://lazygyu.github.io/roulette )
+## What changed in this branch
 
-# Requirements
+- Removed external tracking (Google Analytics)
+- Removed external brand-specific assets and links
+- Removed person-specific image assets
+- Removed recap page/assets that depended on GSAP
+- Disabled external keyword sprite API usage by default
+- Added starter UI text/theme/map title customizations
+- Added `NOTICE` and `ATTRIBUTION` files for compliance
 
-- Typescript
-- Parcel
-- box2d-wasm
+## License
 
-# Development
+- Upstream code license: MIT (`LICENSE`)
+- This fork remains MIT
+- Keep the MIT copyright/license notice when redistributing
 
-```shell
-> yarn
-> yarn dev
+## Development
+
+```bash
+npm install
+npm run dev
 ```
 
-# Build
+## Build
 
-```shell
-> yarn build
+```bash
+npm run build
 ```
+
+> Note: For best compatibility, use Node.js LTS (20.x recommended).

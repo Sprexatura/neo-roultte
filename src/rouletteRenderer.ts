@@ -8,7 +8,6 @@ import { UIObject } from './UIObject';
 import { VectorLike } from './types/VectorLike';
 import { MapEntityState } from './types/MapEntity.type';
 import { ColorTheme } from './types/ColorTheme';
-import { KeywordService } from './keywordService';
 
 export type RenderParameters = {
   camera: Camera;
@@ -31,7 +30,6 @@ export class RouletteRenderer {
 
   private _images: { [key: string]: HTMLImageElement } = {};
   private _theme: ColorTheme = Themes.dark;
-  private _keywordService: KeywordService = new KeywordService();
 
   constructor() {
   }
@@ -53,7 +51,7 @@ export class RouletteRenderer {
   }
 
   async init() {
-    await Promise.all([this._load(), this._keywordService.init()]);
+    await this._load();
 
     this._canvas = document.createElement('canvas');
     this._canvas.width = canvasWidth;
@@ -92,35 +90,11 @@ export class RouletteRenderer {
   }
 
   private async _load(): Promise<void> {
-    const loadPromises =
-      [
-        { name: '챔루', imgUrl: new URL('../assets/images/chamru.png', import.meta.url) },
-        { name: '쿠빈', imgUrl: new URL('../assets/images/kubin.png', import.meta.url) },
-        { name: '꽉변', imgUrl: new URL('../assets/images/kkwak.png', import.meta.url) },
-        { name: '꽉변호사', imgUrl: new URL('../assets/images/kkwak.png', import.meta.url) },
-        { name: '꽉 변호사', imgUrl: new URL('../assets/images/kkwak.png', import.meta.url) },
-        { name: '주누피', imgUrl: new URL('../assets/images/junyoop.png', import.meta.url) },
-        { name: '왈도쿤', imgUrl: new URL('../assets/images/waldokun.png', import.meta.url) },
-      ].map(({ name, imgUrl }) => {
-        return (async () => {
-          this._images[name] = await this._loadImage(imgUrl.toString());
-        })();
-      });
-
-    loadPromises.push((async () => {
-      await this._loadImage(new URL('../assets/images/ff.svg', import.meta.url).toString());
-    })());
-
-    await Promise.all(loadPromises);
+    await this._loadImage(new URL('../assets/images/ff.svg', import.meta.url).toString());
   }
 
   private getMarbleImage(name: string): CanvasImageSource | undefined {
-    // Priority 1: Hardcoded images
-    if (this._images[name]) {
-      return this._images[name];
-    }
-    // Priority 2: Keyword sprites from API
-    return this._keywordService.getSprite(name);
+    return this._images[name];
   }
 
   render(renderParameters: RenderParameters, uiObjects: UIObject[]) {

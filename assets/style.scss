@@ -85,7 +85,7 @@ div.copyright a {
   position: fixed;
   bottom: 1rem;
   left: 1rem;
-  background: #666;
+  background: #2b3150;
   border-radius: 10px;
   padding: 10px;
   z-index: 999;
@@ -112,13 +112,13 @@ div.copyright a {
     width: 100%;
     min-height: 5rem;
     border: none;
-    background: #999;
+    background: #dde4ff;
     font-size: 14pt;
   }
 
   button, .btn {
     color: #fefefe;
-    background: #222;
+    background: #1c2238;
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
@@ -135,27 +135,6 @@ div.copyright a {
       background: rgba(0, 0, 0, 0.5);
     }
 
-    &#btnShop {
-      height: 35px;
-
-      img {
-        width: 25px;
-        height: 25px;
-      }
-    }
-
-    &.new::before {
-      position: absolute;
-      background: #AA0000;
-      color: white;
-      content: 'NEW';
-      font-size: 9px;
-      padding: 2px 4px;
-      right: -10px;
-      top: -4px;
-      border-radius: 6px;
-      z-index: 1;
-    }
   }
 
   div.theme {
@@ -215,7 +194,7 @@ div.copyright a {
     height: 25px;
     width: 100%;
     border-radius: 5px;
-    background: #999;
+    background: #dde4ff;
   }
 
   input[type=checkbox] {
@@ -233,7 +212,7 @@ div.copyright a {
       width: 50px;
       height: 25px;
       border-radius: 25px;
-      background: #999;
+      background: #6f7bb6;
       top: 0;
       left: 0;
     }
@@ -273,7 +252,7 @@ div.copyright a {
       height: 25px;
       width: 33%;
       border-radius: 0;
-      background: #999;
+      background: #6f7bb6;
       border: none;
       padding: 0;
       color: #fefefe;
@@ -540,29 +519,3 @@ div.toast {
 }
 
 
-.shop-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: .2em .4em .4em .4em;
-  margin: 0 auto;
-  width: fit-content;
-
-  color: white;
-  font-size: 32px;
-  line-height: 48px;
-  font-weight: bold;
-  text-decoration: none;
-
-  img {
-    width: 48px;
-    height: 48px;
-    margin-right: .2em;
-    margin-bottom: -4px;
-  }
-
-  background-color: #0077ff;
-  border: 2px solid black;
-  border-radius: 10px;
-}

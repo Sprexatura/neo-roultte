@@ -1,0 +1,9 @@
+This project includes software from the following upstream source:
+
+- lazygyu/roulette (https://github.com/lazygyu/roulette)
+  License: MIT
+  Copyright (c) 2023 LazyGyu
+
+This fork modifies UI, assets, and dependency usage for customization and safer redistribution.
+
+Per MIT license terms, the original copyright and license notice are preserved in `LICENSE`.

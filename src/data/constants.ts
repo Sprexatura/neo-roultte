@@ -25,10 +25,10 @@ export const DefaultBloomColor = {
 
 export const Themes: Record<string, ColorTheme> = {
   light: {
-    background: '#eee',
+    background: '#f4f7ff',
     marbleLightness: 50,
     marbleWinningBorder: 'black',
-    skillColor: '#69c',
+    skillColor: '#5b7cfa',
     coolTimeIndicator: '#999',
     entity: {
       box: {
@@ -59,22 +59,22 @@ export const Themes: Record<string, ColorTheme> = {
     winnerText: '#cccccc',
   },
   dark: {
-    background: 'black',
+    background: '#0f1220',
     marbleLightness: 75,
     marbleWinningBorder: 'white',
     skillColor: 'white',
     coolTimeIndicator: 'red',
     entity: {
       box: {
-        fill: 'cyan',
-        outline: 'cyan',
-        bloom: 'cyan',
+        fill: '#5b7cfa',
+        outline: '#5b7cfa',
+        bloom: '#89a1ff',
         bloomRadius: 15,
       },
       circle: {
-        fill: 'yellow',
-        outline: 'yellow',
-        bloom: 'yellow',
+        fill: '#ffd166',
+        outline: '#ffd166',
+        bloom: '#ffe29a',
         bloomRadius: 15,
       },
       polyline: {
