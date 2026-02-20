@@ -197,8 +197,11 @@
       setWinnerRank(1);
     });
 
-    window.roulette.addEventListener('goal', () => {
+    window.roulette.addEventListener('goal', (e) => {
       ready = false;
+      if (e.detail?.zone) {
+        simpleToast(`Winner lane: ${e.detail.zone}`);
+      }
       setTimeout(() => {
         document.querySelector('#settings').classList.remove('hide');
         document.querySelector('#donate').classList.remove('hide');

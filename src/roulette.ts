@@ -1,7 +1,7 @@
 import { Marble } from './marble';
 import { canvasHeight, canvasWidth, initialZoom, Skills, Themes, zoomThreshold } from './data/constants';
 import { ParticleManager } from './particleManager';
-import { StageDef, stages } from './data/maps';
+import { FinishZone, StageDef, stages } from './data/maps';
 import { parseName, shuffle } from './utils/utils';
 import { Camera } from './camera';
 import { RouletteRenderer } from './rouletteRenderer';
@@ -43,6 +43,7 @@ export class Roulette extends EventTarget {
   private _goalDist: number = Infinity;
   private _isRunning: boolean = false;
   private _winner: Marble | null = null;
+  private _winnerZoneName: string | null = null;
 
   private _uiObjects: UIObject[] = [];
 
@@ -128,8 +129,33 @@ export class Roulette extends EventTarget {
     window.requestAnimationFrame(this._update);
   }
 
+  private _getGoalZone(marble: Marble): FinishZone | null {
+    if (!this._stage) return null;
+
+    if (this._stage.finishZones && this._stage.finishZones.length > 0) {
+      return (
+        this._stage.finishZones.find(
+          (zone) => marble.y > zone.y && marble.x >= zone.xMin && marble.x <= zone.xMax,
+        ) || null
+      );
+    }
+
+    if (marble.y > this._stage.goalY) {
+      return {
+        name: 'Goal',
+        xMin: Number.NEGATIVE_INFINITY,
+        xMax: Number.POSITIVE_INFINITY,
+        y: this._stage.goalY,
+      };
+    }
+
+    return null;
+  }
+
   private _updateMarbles(deltaTime: number) {
     if (!this._stage) return;
+
+    const reachedMarbleIds = new Set<number>();
 
     for (let i = 0; i < this._marbles.length; i++) {
       const marble = this._marbles[i];
@@ -138,13 +164,18 @@ export class Roulette extends EventTarget {
         this._effects.push(new SkillEffect(marble.x, marble.y));
         this.physics.impact(marble.id);
       }
-      if (marble.y > this._stage.goalY) {
+
+      const reachedZone = this._getGoalZone(marble);
+      if (reachedZone) {
+        reachedMarbleIds.add(marble.id);
         this._winners.push(marble);
+
         if (this._isRunning && this._winners.length === this._winnerRank + 1) {
           this.dispatchEvent(
-            new CustomEvent('goal', { detail: { winner: marble.name } }),
+            new CustomEvent('goal', { detail: { winner: marble.name, zone: reachedZone.name } }),
           );
           this._winner = marble;
+          this._winnerZoneName = reachedZone.name;
           this._isRunning = false;
           this._particleManager.shot(
             this._renderer.width,
@@ -158,12 +189,17 @@ export class Roulette extends EventTarget {
           this._winnerRank === this._winners.length &&
           this._winnerRank === this._totalMarbleCount - 1
         ) {
-          this.dispatchEvent(
-            new CustomEvent('goal', {
-              detail: { winner: this._marbles[i + 1].name },
-            }),
-          );
-          this._winner = this._marbles[i + 1];
+          const lastMarble = this._marbles[i + 1];
+          if (lastMarble) {
+            const lastZone = this._getGoalZone(lastMarble);
+            this.dispatchEvent(
+              new CustomEvent('goal', {
+                detail: { winner: lastMarble.name, zone: lastZone?.name ?? reachedZone.name },
+              }),
+            );
+            this._winner = lastMarble;
+            this._winnerZoneName = lastZone?.name ?? reachedZone.name;
+          }
           this._isRunning = false;
           this._particleManager.shot(
             this._renderer.width,
@@ -185,7 +221,7 @@ export class Roulette extends EventTarget {
     this._timeScale = this._calcTimeScale();
 
     this._marbles = this._marbles.filter(
-      (marble) => marble.y <= this._stage!.goalY,
+      (marble) => !reachedMarbleIds.has(marble.id),
     );
   }
 
@@ -224,6 +260,7 @@ export class Roulette extends EventTarget {
       effects: this._effects,
       winnerRank: this._winnerRank,
       winner: this._winner,
+      winnerZoneName: this._winnerZoneName,
       size: { x: this._renderer.width, y: this._renderer.height },
       theme: this._theme,
     };
@@ -316,6 +353,7 @@ export class Roulette extends EventTarget {
   public clearMarbles() {
     this.physics.clearMarbles();
     this._winner = null;
+    this._winnerZoneName = null;
     this._winners = [];
     this._marbles = [];
   }

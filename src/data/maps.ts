@@ -1,10 +1,18 @@
 import { MapEntity } from '../types/MapEntity.type';
 
+export type FinishZone = {
+  name: string;
+  xMin: number;
+  xMax: number;
+  y: number;
+};
+
 export type StageDef = {
   title: string;
   entities?: MapEntity[];
   goalY: number;
   zoomY: number;
+  finishZones?: FinishZone[];
 };
 
 export const stages: StageDef[] = [
@@ -12,6 +20,11 @@ export const stages: StageDef[] = [
     title: 'Starter Wheel',
     goalY: 111,
     zoomY: 106.75,
+    finishZones: [
+      { name: 'Left Lane', xMin: 2, xMax: 9.8, y: 111 },
+      { name: 'Center Lane', xMin: 9.8, xMax: 16.8, y: 111 },
+      { name: 'Right Lane', xMin: 16.8, xMax: 24.5, y: 111 },
+    ],
     entities: [
       // polyline
       {

@@ -19,6 +19,7 @@ export type RenderParameters = {
   effects: GameObject[];
   winnerRank: number;
   winner: Marble | null;
+  winnerZoneName?: string | null;
   size: VectorLike;
   theme: ColorTheme;
 };
@@ -197,7 +198,7 @@ export class RouletteRenderer {
     });
   }
 
-  private renderWinner({ winner, theme }: RenderParameters) {
+  private renderWinner({ winner, winnerZoneName, theme }: RenderParameters) {
     if (!winner) return;
     this.ctx.save();
     this.ctx.fillStyle = theme.winnerBackground;
@@ -247,6 +248,16 @@ export class RouletteRenderer {
       this.ctx.strokeText(winner.name, textRightX, this._canvas.height - 55);
     }
     this.ctx.fillText(winner.name, textRightX, this._canvas.height - 55);
+
+    if (winnerZoneName) {
+      this.ctx.font = 'bold 28px sans-serif';
+      this.ctx.fillStyle = theme.winnerText;
+      const zoneLabel = `Lane: ${winnerZoneName}`;
+      if (theme.winnerOutline) {
+        this.ctx.strokeText(zoneLabel, textRightX, this._canvas.height - 20);
+      }
+      this.ctx.fillText(zoneLabel, textRightX, this._canvas.height - 20);
+    }
     this.ctx.restore();
   }
 }
